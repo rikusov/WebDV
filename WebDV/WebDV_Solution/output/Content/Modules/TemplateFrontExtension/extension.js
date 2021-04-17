@@ -1,5 +1,11 @@
 define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvision/webclient/System/ExtensionManager'], function (tslib, MessageBox, ExtensionManager) { 'use strict';
 
+    /**
+     * События считающее количетво дней между даты с и даты по
+     * @param l laypot для поиска поля количества дней
+     * @param dBTW // дата с
+     * @param dBTT //дата по
+     */
     function setCountDayBusinesDay(l, dBTW, dBTT) {
         var CountDayBT = l.controls.tryGet("CountDayBusinessTrip");
         if (CountDayBT && dBTW && dBTT) {
@@ -10,6 +16,9 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
                 CountDayBT.value = null;
         }
     }
+    /**
+     * событие отлавливающее изменения даты с
+     */
     function dateBusinessTripWithChanged(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var _dateBusinessTripTo;
@@ -21,6 +30,9 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * событие отлавливающее изменения даты по
+     */
     function dateBuSinessTripToChanged(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var _dateBusinessTripWith;
@@ -32,6 +44,9 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * показ краткой информации
+     */
     function OnClickButtonShowShortInfo(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var _nubmerrequest, _dateCreated, _dateBTWith, _dateBTTo, _baseBTInfo, s;
@@ -43,19 +58,19 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
                 _baseBTInfo = sender.layout.controls.tryGet("BaseForBusinessTrip");
                 s = "";
                 if (_nubmerrequest && _nubmerrequest.value.number)
-                    s += "����� ������: " + _nubmerrequest.value.number + "\n";
+                    s += "Номер заявки: " + _nubmerrequest.value.number + "\n";
                 if (_dateCreated && _dateCreated.value)
-                    s += "���� ��������: " + _dateCreated.value.toLocaleDateString("ru") + "\n";
+                    s += "Дата создания: " + _dateCreated.value.toLocaleDateString("ru") + "\n";
                 if (_dateBTWith && _dateBTWith.value)
-                    s += "���� ������������ �:" + _dateBTWith.value.toLocaleDateString("ru") + "\t";
+                    s += "Даты командировки с:" + _dateBTWith.value.toLocaleDateString("ru") + "\t";
                 if (_dateBTTo && _dateBTTo.value)
-                    s += "��: " + _dateBTTo.value.toLocaleDateString("ru") + "\n";
+                    s += "по: " + _dateBTTo.value.toLocaleDateString("ru") + "\n";
                 if (_baseBTInfo && _baseBTInfo.value)
-                    s += "��������� ��� �������: " + _baseBTInfo.value;
+                    s += "Основание для поездки: " + _baseBTInfo.value;
                 if (s != "")
                     MessageBox.MessageBox.ShowInfo(s);
                 else
-                    MessageBox.MessageBox.ShowInfo("�� ������� ���� ��� ����������� ����������");
+                    MessageBox.MessageBox.ShowInfo("Не найдены поля для отображения информации");
                 return [2 /*return*/];
             });
         });
@@ -66,9 +81,21 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             return tslib.__generator(this, function (_a) {
                 _name = sender.controls.tryGet("Name");
                 if (_name && (_name.value == null || _name.value == "")) {
-                    MessageBox.MessageBox.ShowInfo("�� ��������� ���� ��������!");
+                    MessageBox.MessageBox.ShowInfo("Не заполнено поле Название!");
                     e.cancel();
                 }
+                return [2 /*return*/];
+            });
+        });
+    }
+    /**
+     * Корректировка телефона
+     */
+    function CheckTelephone(sender, e) {
+        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
+            return tslib.__generator(this, function (_a) {
+                if (sender.value && sender.value.length > 12)
+                    sender.value = sender.value.substring(0, 12);
                 return [2 /*return*/];
             });
         });
@@ -79,7 +106,8 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
         dateBusinessTripWithChanged: dateBusinessTripWithChanged,
         dateBuSinessTripToChanged: dateBuSinessTripToChanged,
         OnClickButtonShowShortInfo: OnClickButtonShowShortInfo,
-        CardBeforeSaving: CardBeforeSaving
+        CardBeforeSaving: CardBeforeSaving,
+        CheckTelephone: CheckTelephone
     });
 
     // Главная входная точка всего расширения

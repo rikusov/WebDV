@@ -35,6 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox";
+/**
+ * События считающее количетво дней между даты с и даты по
+ * @param l laypot для поиска поля количества дней
+ * @param dBTW // дата с
+ * @param dBTT //дата по
+ */
 function setCountDayBusinesDay(l, dBTW, dBTT) {
     var CountDayBT = l.controls.tryGet("CountDayBusinessTrip");
     if (CountDayBT && dBTW && dBTT) {
@@ -45,6 +51,9 @@ function setCountDayBusinesDay(l, dBTW, dBTT) {
             CountDayBT.value = null;
     }
 }
+/**
+ * событие отлавливающее изменения даты с
+ */
 export function dateBusinessTripWithChanged(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var _dateBusinessTripTo;
@@ -56,6 +65,9 @@ export function dateBusinessTripWithChanged(sender, e) {
         });
     });
 }
+/**
+ * событие отлавливающее изменения даты по
+ */
 export function dateBuSinessTripToChanged(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var _dateBusinessTripWith;
@@ -67,6 +79,9 @@ export function dateBuSinessTripToChanged(sender, e) {
         });
     });
 }
+/**
+ * показ краткой информации
+ */
 export function OnClickButtonShowShortInfo(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var _nubmerrequest, _dateCreated, _dateBTWith, _dateBTTo, _baseBTInfo, s;
@@ -104,6 +119,18 @@ export function CardBeforeSaving(sender, e) {
                 MessageBox.ShowInfo("Не заполнено поле Название!");
                 e.cancel();
             }
+            return [2 /*return*/];
+        });
+    });
+}
+/**
+ * Корректировка телефона
+ */
+export function CheckTelephone(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        return __generator(this, function (_a) {
+            if (sender.value && sender.value.length > 12)
+                sender.value = sender.value.substring(0, 12);
             return [2 /*return*/];
         });
     });

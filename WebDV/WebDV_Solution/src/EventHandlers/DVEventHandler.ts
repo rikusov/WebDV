@@ -12,7 +12,12 @@ import { Layout } from "@docsvision/webclient/System/Layout";
 import { layoutManager } from "@docsvision/webclient/System/LayoutManager";
 import { func } from "prop-types";
 
-
+/**
+ * События считающее количетво дней между даты с и даты по
+ * @param l laypot для поиска поля количества дней
+ * @param dBTW // дата с
+ * @param dBTT //дата по
+ */
 function setCountDayBusinesDay(l: Layout, dBTW: Date, dBTT: Date) {
     let CountDayBT = l.controls.tryGet<NumberControl>("CountDayBusinessTrip");
 
@@ -22,21 +27,27 @@ function setCountDayBusinesDay(l: Layout, dBTW: Date, dBTT: Date) {
         else CountDayBT.value = null;
     }
 }
-
+/**
+ * событие отлавливающее изменения даты с
+ */
 export async function dateBusinessTripWithChanged(sender: DateTimePicker, e: any): JQueryDeferred<void> {
     let _dateBusinessTripTo = sender.layout.controls.tryGet<DateTimePicker>("DateBusinessTripTo");
 
     if (_dateBusinessTripTo && _dateBusinessTripTo.value)
         setCountDayBusinesDay(sender.layout, sender.value, _dateBusinessTripTo.value);
 }
-
+/**
+ * событие отлавливающее изменения даты по 
+ */
 export async function dateBuSinessTripToChanged(sender: DateTimePicker, e: any): JQueryDeferred<void> {
     let _dateBusinessTripWith = sender.layout.controls.tryGet<DateTimePicker>("DateBusinessTripWith");
 
     if (_dateBusinessTripWith && _dateBusinessTripWith.value)
         setCountDayBusinesDay(sender.layout, _dateBusinessTripWith.value, sender.value,);
 }
-
+/**
+ * показ краткой информации 
+ */
 export async function OnClickButtonShowShortInfo(sender: CustomButton, e: any): JQueryDeferred<void> {
     let _nubmerrequest = sender.layout.controls.tryGet<Numerator>("Number");
     let _dateCreated = sender.layout.controls.tryGet<DateTimePicker>("DateCreated");
@@ -46,21 +57,28 @@ export async function OnClickButtonShowShortInfo(sender: CustomButton, e: any): 
 
     let s = "";
 
-    if (_nubmerrequest && _nubmerrequest.value.number) s +="����� ������: " + _nubmerrequest.value.number + "\n";
-    if (_dateCreated && _dateCreated.value) s += "���� ��������: " + _dateCreated.value.toLocaleDateString("ru") + "\n";
-    if (_dateBTWith && _dateBTWith.value) s += "���� ������������ �:" + _dateBTWith.value.toLocaleDateString("ru") + "\t";
-    if (_dateBTTo && _dateBTTo.value) s += "��: " + _dateBTTo.value.toLocaleDateString("ru") + "\n";
-    if (_baseBTInfo && _baseBTInfo.value) s += "��������� ��� �������: " + _baseBTInfo.value;
+    if (_nubmerrequest && _nubmerrequest.value.number) s +="Номер заявки: " + _nubmerrequest.value.number + "\n";
+    if (_dateCreated && _dateCreated.value) s += "Дата создания: " + _dateCreated.value.toLocaleDateString("ru") + "\n";
+    if (_dateBTWith && _dateBTWith.value) s += "Даты командировки с:" + _dateBTWith.value.toLocaleDateString("ru") + "\t";
+    if (_dateBTTo && _dateBTTo.value) s += "по: " + _dateBTTo.value.toLocaleDateString("ru") + "\n";
+    if (_baseBTInfo && _baseBTInfo.value) s += "Основание для поездки: " + _baseBTInfo.value;
 
     if (s != "") MessageBox.ShowInfo(s);
-    else MessageBox.ShowInfo("�� ������� ���� ��� ����������� ����������");
+    else MessageBox.ShowInfo("Не найдены поля для отображения информации");
 }
 
 export async function CardBeforeSaving(sender: Layout, e: CancelableEventArgs<ICardSavingEventArgs>): JQueryDeferred<void> {
     let _name = sender.controls.tryGet<TextBox>("Name");
 
     if (_name && (_name.value == null || _name.value == "")) {
-        MessageBox.ShowInfo("�� ��������� ���� ��������!");
+        MessageBox.ShowInfo("Не заполнено поле Название!");
         e.cancel();
     } 
 }
+/**
+ * Корректировка телефона
+ */
+export async function CheckTelephone(sender: TextBox, e: any): JQueryDeferred<void> {
+    if (sender.value && sender.value.length > 12) sender.value = sender.value.substring(0, 12);
+}
+

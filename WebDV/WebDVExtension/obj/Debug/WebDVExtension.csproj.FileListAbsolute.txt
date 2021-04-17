@@ -1,0 +1,8 @@
+C:\Users\Ra19\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.csprojAssemblyReference.cache
+C:\Users\Ra19\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.csproj.CoreCompileInputs.cache
+C:\Users\Ra19\Documents\GitHub\WebDV\bin\WebClientBin\WebDVExtension.dll.config
+C:\Users\Ra19\Documents\GitHub\WebDV\bin\WebClientBin\WebDVExtension.dll
+C:\Users\Ra19\Documents\GitHub\WebDV\bin\WebClientBin\WebDVExtension.pdb
+C:\Users\Ra19\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.csproj.CopyComplete
+C:\Users\Ra19\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.dll
+C:\Users\Ra19\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.pdb
