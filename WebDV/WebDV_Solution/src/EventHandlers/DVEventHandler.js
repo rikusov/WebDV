@@ -41,7 +41,7 @@ import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox"
  * @param dBTW // дата с
  * @param dBTT //дата по
  */
-function setCountDayBusinesDay(l, dBTW, dBTT) {
+export function setCountDayBusinesDay(l, dBTW, dBTT) {
     var CountDayBT = l.controls.tryGet("CountDayBusinessTrip");
     if (CountDayBT && dBTW && dBTT) {
         var diff = Math.floor((dBTT.getTime() - dBTW.getTime()) / (1000 * 3600 * 24)) + 1;
@@ -131,6 +131,45 @@ export function CheckTelephone(sender, e) {
         return __generator(this, function (_a) {
             if (sender.value && sender.value.length > 12)
                 sender.value = sender.value.substring(0, 12);
+            return [2 /*return*/];
+        });
+    });
+}
+export function SetDirector(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/];
+        });
+    });
+}
+export function CardActivatedForShow(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var ButtonOnApproval, StateButton;
+        return __generator(this, function (_a) {
+            ButtonOnApproval = sender.controls.tryGet("OnApproval");
+            StateButton = sender.controls.tryGet("ButtonState");
+            if (ButtonOnApproval && sender.cardInfo.state.caption == "Проект") {
+                if (StateButton)
+                    StateButton.params.visibility = false;
+            }
+            else if (ButtonOnApproval)
+                ButtonOnApproval.params.visibility = false;
+            return [2 /*return*/];
+        });
+    });
+}
+export function CardActivatedForEdit(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        return __generator(this, function (_a) {
+            MessageBox.ShowInfo(e.defaultSender);
+            return [2 /*return*/];
+        });
+    });
+}
+export function ButtonOnApproval(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        return __generator(this, function (_a) {
+            MessageBox.ShowInfo("тык!");
             return [2 /*return*/];
         });
     });

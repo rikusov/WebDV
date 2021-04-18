@@ -164,6 +164,13 @@ namespace WebDVExtension
 
             };
         }
+        /// <summary>
+        /// Version
+        /// </summary>
+        /// <returns></returns>
+        protected override WebClientNavigatorExtension GetNavigatorExtension(){
+            return new WebClientNavigatorExtension(new WebClientNavigatorExtensionInitInfo {ExtensionName = ExtensionName, ExtensionVersion = ExtensionVersion });
+        }
 
         #endregion
     }

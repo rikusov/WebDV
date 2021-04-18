@@ -100,14 +100,58 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    function SetDirector(sender, e) {
+        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
+            return tslib.__generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    }
+    function CardActivatedForShow(sender, e) {
+        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
+            var ButtonOnApproval, StateButton;
+            return tslib.__generator(this, function (_a) {
+                ButtonOnApproval = sender.controls.tryGet("OnApproval");
+                StateButton = sender.controls.tryGet("ButtonState");
+                if (ButtonOnApproval && sender.cardInfo.state.caption == "Проект") {
+                    if (StateButton)
+                        StateButton.params.visibility = false;
+                }
+                else if (ButtonOnApproval)
+                    ButtonOnApproval.params.visibility = false;
+                return [2 /*return*/];
+            });
+        });
+    }
+    function CardActivatedForEdit(sender, e) {
+        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
+            return tslib.__generator(this, function (_a) {
+                MessageBox.MessageBox.ShowInfo(e.defaultSender);
+                return [2 /*return*/];
+            });
+        });
+    }
+    function ButtonOnApproval(sender, e) {
+        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
+            return tslib.__generator(this, function (_a) {
+                MessageBox.MessageBox.ShowInfo("тык!");
+                return [2 /*return*/];
+            });
+        });
+    }
 
     var DVEventHandler = /*#__PURE__*/Object.freeze({
         __proto__: null,
+        setCountDayBusinesDay: setCountDayBusinesDay,
         dateBusinessTripWithChanged: dateBusinessTripWithChanged,
         dateBuSinessTripToChanged: dateBuSinessTripToChanged,
         OnClickButtonShowShortInfo: OnClickButtonShowShortInfo,
         CardBeforeSaving: CardBeforeSaving,
-        CheckTelephone: CheckTelephone
+        CheckTelephone: CheckTelephone,
+        SetDirector: SetDirector,
+        CardActivatedForShow: CardActivatedForShow,
+        CardActivatedForEdit: CardActivatedForEdit,
+        ButtonOnApproval: ButtonOnApproval
     });
 
     // Главная входная точка всего расширения
