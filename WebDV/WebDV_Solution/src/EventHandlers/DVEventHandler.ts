@@ -1,17 +1,11 @@
-import { Employee } from "@docsvision/webclient/BackOffice/Employee";
 import { Numerator } from "@docsvision/webclient/BackOffice/Numerator";
-import { StateButtons } from "@docsvision/webclient/BackOffice/StateButtons";
-import { Button } from "@docsvision/webclient/Helpers/Button";
 import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox";
 import { CustomButton } from "@docsvision/webclient/Platform/CustomButton";
 import { DateTimePicker } from "@docsvision/webclient/Platform/DateTimePicker";
 import { NumberControl } from "@docsvision/webclient/Platform/Number";
 import { TextArea } from "@docsvision/webclient/Platform/TextArea";
 import { TextBox } from "@docsvision/webclient/Platform/TextBox";
-import { BasicApiEvent } from "@docsvision/webclient/System/ApiEvent";
-import { BasicEvent } from "@docsvision/webclient/System/BasicEvent";
 import { CancelableEventArgs } from "@docsvision/webclient/System/CancelableEventArgs";
-import { ExtensionManager } from "@docsvision/webclient/System/ExtensionManager";
 import { ICardSavingEventArgs } from "@docsvision/webclient/System/ICardSavingEventArgs";
 import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
 import { Layout } from "@docsvision/webclient/System/Layout";
@@ -24,7 +18,7 @@ import { func } from "prop-types";
  * @param dBTW // дата с
  * @param dBTT //дата по
  */
-export function setCountDayBusinesDay(l: Layout, dBTW: Date, dBTT: Date) {
+function setCountDayBusinesDay(l: Layout, dBTW: Date, dBTT: Date) {
     let CountDayBT = l.controls.tryGet<NumberControl>("CountDayBusinessTrip");
 
     if (CountDayBT && dBTW && dBTT) {
@@ -88,29 +82,3 @@ export async function CheckTelephone(sender: TextBox, e: any): JQueryDeferred<vo
     if (sender.value && sender.value.length > 12) sender.value = sender.value.substring(0, 12);
 }
 
-export async function SetDirector(sender: Employee, e: any): JQueryDeferred<void> {
-       
-    //pass
-}
-
-export async function CardActivatedForShow(sender: Layout, e: any): JQueryDeferred<void> {
-
-    let ButtonOnApproval = sender.controls.tryGet<CustomButton>("OnApproval");
-    let StateButton = sender.controls.tryGet<StateButtons>("ButtonState");
-
-    if (ButtonOnApproval && sender.cardInfo.state.caption == "Проект") {
-        if (StateButton) StateButton.params.visibility = false;
-    }
-    else if (ButtonOnApproval) ButtonOnApproval.params.visibility = false;
-
-}
-
-export async function CardActivatedForEdit(sender: Layout, e: BasicEvent<IEventArgs>): JQueryDeferred<void> {
-
-    MessageBox.ShowInfo(e.defaultSender);
-
-}
-
-export async function ButtonOnApproval(sender: CustomButton, e: any): JQueryDeferred<void> {
-    MessageBox.ShowInfo("тык!");
-}

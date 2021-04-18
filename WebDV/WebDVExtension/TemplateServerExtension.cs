@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Resources;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
+using WebDVExtension.Contrrollers;
 
 namespace WebDVExtension
 {
@@ -71,12 +72,11 @@ namespace WebDVExtension
         /// </summary>
         /// <param name="serviceProvider">service provider</param>
         /// <returns>MVC controller type/activator mappings</returns>
-        protected override Dictionary<Type, Func<IController>> GetControllerActivators(IServiceProvider serviceProvider)
-        {
-            return new Dictionary<Type, Func<IController>>
-            {
+        protected override Dictionary<Type, Func<IController>> GetControllerActivators(IServiceProvider serviceProvider){
+            Dictionary<Type, Func<IController>> baseControllers = base.GetControllerActivators(serviceProvider);
+            baseControllers.Add(typeof(TestController), () => new TestController(serviceProvider));
 
-            };
+            return baseControllers;
         }
 
         /// <summary>
@@ -163,13 +163,6 @@ namespace WebDVExtension
             {
 
             };
-        }
-        /// <summary>
-        /// Version
-        /// </summary>
-        /// <returns></returns>
-        protected override WebClientNavigatorExtension GetNavigatorExtension(){
-            return new WebClientNavigatorExtension(new WebClientNavigatorExtensionInitInfo {ExtensionName = ExtensionName, ExtensionVersion = ExtensionVersion });
         }
 
         #endregion

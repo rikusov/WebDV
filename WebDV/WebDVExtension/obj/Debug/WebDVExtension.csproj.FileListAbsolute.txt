@@ -13,9 +13,6 @@ C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\Web
 C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.csproj.CopyComplete
 C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.dll
 C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.pdb
-C:\bin\Debug\WebDVExtension.dll.config
-C:\bin\Debug\WebDVExtension.dll
-C:\bin\Debug\WebDVExtension.pdb
 C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\WebDVExtension.dll.config
 C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\WebDVExtension.dll
 C:\Users\Administrator\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\WebDVExtension.pdb
