@@ -1,1 +1,2 @@
 C:\Users\Ra19\Documents\GitHub\WebDV\WebDV\WebDV_Solution\obj\Debug\WebDV_Solution.njsprojAssemblyReference.cache
+C:\Users\Alexandr\Documents\GitHub\WebDV\WebDV\WebDV_Solution\obj\Debug\WebDV_Solution.njsprojAssemblyReference.cache

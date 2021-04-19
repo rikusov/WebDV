@@ -11,6 +11,7 @@ using System.Resources;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using WebDVExtension.Contrrollers;
+using WebDVExtension.Services;
 
 namespace WebDVExtension
 {
@@ -59,12 +60,13 @@ namespace WebDVExtension
         /// </summary>
         /// <param name="serviceProvider">service provider</param>
         /// <returns>service type/activator mappings</returns>
-        protected override Dictionary<Type, Func<object>> GetServiceActivators(IServiceProvider serviceProvider)
-        {
-            return new Dictionary<Type, Func<object>>
-            {
+        protected override Dictionary<Type, Func<object>> GetServiceActivators(IServiceProvider serviceProvider){
+            Dictionary<Type, Func<object>> baseServiceActivator = base.GetServiceActivators(serviceProvider);
+            baseServiceActivator.Add(typeof(ICustomEmployeeService), () => new CustomEmployeeService(serviceProvider));
+            baseServiceActivator.Add(typeof(IGetDirectorService), () => new GetDirectorService());
+            baseServiceActivator.Add(typeof(IGetEmployeesSecretary), () => new GetEmployeesSecretary());
 
-            };
+            return baseServiceActivator;
         }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace WebDVExtension
         protected override Dictionary<Type, Func<IController>> GetControllerActivators(IServiceProvider serviceProvider){
             Dictionary<Type, Func<IController>> baseControllers = base.GetControllerActivators(serviceProvider);
             baseControllers.Add(typeof(TestController), () => new TestController(serviceProvider));
+            baseControllers.Add(typeof(DVController), () => new DVController(serviceProvider));
 
             return baseControllers;
         }
@@ -164,6 +167,11 @@ namespace WebDVExtension
 
             };
         }
+
+        protected override WebClientNavigatorExtension GetNavigatorExtension(){
+            return new WebClientNavigatorExtension( new WebClientNavigatorExtensionInitInfo { ExtensionName = ExtensionName, ExtensionVersion = ExtensionVersion});
+        }
+
 
         #endregion
     }

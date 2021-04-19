@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12,11 +11,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.SomeControlImpl = void 0;
-var react_1 = require("react");
-var BaseControlImpl_1 = require("@docsvision/webclient/System/BaseControlImpl");
-var LayoutManager_1 = require("@docsvision/webclient/System/LayoutManager");
+import React from "react";
+import { BaseControlImpl } from "@docsvision/webclient/System/BaseControlImpl";
+import { layoutManager } from "@docsvision/webclient/System/LayoutManager";
 var SomeControlImpl = /** @class */ (function (_super) {
     __extends(SomeControlImpl, _super);
     function SomeControlImpl(props, state) {
@@ -25,12 +22,11 @@ var SomeControlImpl = /** @class */ (function (_super) {
     SomeControlImpl.prototype.componentDidMount = function () {
     };
     SomeControlImpl.prototype.renderControl = function () {
-        if (LayoutManager_1.layoutManager.cardLayout) {
-            return (<div>
-                    Hello world!
-                </div>);
+        if (layoutManager.cardLayout) {
+            return (React.createElement("div", null, "Hello world!"));
         }
     };
     return SomeControlImpl;
-}(BaseControlImpl_1.BaseControlImpl));
-exports.SomeControlImpl = SomeControlImpl;
+}(BaseControlImpl));
+export { SomeControlImpl };
+//# sourceMappingURL=SomeControlImpl.js.map

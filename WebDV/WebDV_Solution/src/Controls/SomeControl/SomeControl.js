@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -18,25 +17,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-exports.__esModule = true;
-exports.SomeControl = exports.SomeControlParams = void 0;
-var BaseControl_1 = require("@docsvision/webclient/System/BaseControl");
-var SomeControlImpl_1 = require("./SomeControlImpl");
-var Readwrite_1 = require("@docsvision/webclient/System/Readwrite");
+import { BaseControl, BaseControlParams } from "@docsvision/webclient/System/BaseControl";
+import { SomeControlImpl } from "./SomeControlImpl";
+import { rw } from "@docsvision/webclient/System/Readwrite";
 var SomeControlParams = /** @class */ (function (_super) {
     __extends(SomeControlParams, _super);
     function SomeControlParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Readwrite_1.rw
-    ], SomeControlParams.prototype, "id");
+        rw
+    ], SomeControlParams.prototype, "id", void 0);
     __decorate([
-        Readwrite_1.rw
-    ], SomeControlParams.prototype, "someParam");
+        rw
+    ], SomeControlParams.prototype, "someParam", void 0);
     return SomeControlParams;
-}(BaseControl_1.BaseControlParams));
-exports.SomeControlParams = SomeControlParams;
+}(BaseControlParams));
+export { SomeControlParams };
 var SomeControl = /** @class */ (function (_super) {
     __extends(SomeControl, _super);
     function SomeControl() {
@@ -46,8 +43,9 @@ var SomeControl = /** @class */ (function (_super) {
         return new SomeControlParams();
     };
     SomeControl.prototype.createImpl = function () {
-        return new SomeControlImpl_1.SomeControlImpl(this.props, this.state);
+        return new SomeControlImpl(this.props, this.state);
     };
     return SomeControl;
-}(BaseControl_1.BaseControl));
-exports.SomeControl = SomeControl;
+}(BaseControl));
+export { SomeControl };
+//# sourceMappingURL=SomeControl.js.map

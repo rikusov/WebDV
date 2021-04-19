@@ -35,13 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox";
+import { $DVController } from "../Controllers/DVController";
 /**
  * События считающее количетво дней между даты с и даты по
  * @param l laypot для поиска поля количества дней
  * @param dBTW // дата с
  * @param dBTT //дата по
  */
-function setCountDayBusinesDay(l, dBTW, dBTT) {
+export function setCountDayBusinesDay(l, dBTW, dBTT) {
     var CountDayBT = l.controls.tryGet("CountDayBusinessTrip");
     if (CountDayBT && dBTW && dBTT) {
         var diff = Math.floor((dBTT.getTime() - dBTW.getTime()) / (1000 * 3600 * 24)) + 1;
@@ -131,6 +132,150 @@ export function CheckTelephone(sender, e) {
         return __generator(this, function (_a) {
             if (sender.value && sender.value.length > 12)
                 sender.value = sender.value.substring(0, 12);
+            return [2 /*return*/];
+        });
+    });
+}
+export function CardActivatedForShow(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var ButtonOnApproval, StateButton;
+        return __generator(this, function (_a) {
+            ButtonOnApproval = sender.controls.tryGet("OnApproval");
+            StateButton = sender.controls.tryGet("ButtonState");
+            if (ButtonOnApproval && sender.cardInfo.state.caption == "Проект") {
+                if (StateButton)
+                    StateButton.params.visibility = false;
+            }
+            else if (ButtonOnApproval)
+                ButtonOnApproval.params.visibility = false;
+            return [2 /*return*/];
+        });
+    });
+}
+export function ButtonOnApproval(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/];
+        });
+    });
+}
+export function ChangePersonBussinesTrip(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var director, telephone, director_model;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    director = sender.layout.controls.tryGet("Director");
+                    telephone = sender.layout.controls.tryGet("Telephone");
+                    if (!(sender.hasValue() && director && telephone)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, $DVController.getDirector(sender.value.id)];
+                case 1:
+                    director_model = _a.sent();
+                    if (director_model) {
+                        director.value = director_model.director;
+                        telephone.value = director_model.phone;
+                    }
+                    _a.label = 2;
+                case 2: return [2 /*return*/];
+            }
+        });
+    });
+}
+export function CardOpened(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var sekretary, whoRegistrating;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, $DVController.getSecretary()];
+                case 1:
+                    sekretary = _a.sent();
+                    whoRegistrating = sender.controls.tryGet("WhoRegistrating");
+                    if (sekretary && whoRegistrating)
+                        whoRegistrating.value = sekretary;
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+export function GetPriceTikcetOnClick(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var tikets, dateBTW, dateBTT, cityControl, priceTik, price;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    tikets = sender.layout.controls.tryGet("Tikets");
+                    if (tikets && tikets.value == "Поезд") {
+                        MessageBox.ShowInfo("Функция запроса стоимости билетов реализована только для Авиаперелетов!");
+                        return [2 /*return*/];
+                    }
+                    dateBTW = sender.layout.controls.tryGet("DateBusinessTripWith");
+                    dateBTT = sender.layout.controls.tryGet("DateBusinessTripTo");
+                    cityControl = sender.layout.controls.tryGet("CityBusinessTrip");
+                    priceTik = sender.layout.controls.tryGet("PriceTickets");
+                    if (!(dateBTT && dateBTT.value && dateBTW && dateBTW.value && cityControl && cityControl.hasValue() && priceTik)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, $DVController.GetPriceTickets(cityControl.value.id, dateBTW.value, dateBTT.value)];
+                case 1:
+                    price = _a.sent();
+                    if (price == -4.0)
+                        MessageBox.ShowInfo("При попытке получения цены произошла ошибка!");
+                    else if (price == -3.0)
+                        MessageBox.ShowInfo("Не найдены билеты вылета и прилета в указаные даты!");
+                    else if (price == -2.0)
+                        MessageBox.ShowInfo("Не найдены билеты прилета в указаную дату!");
+                    else if (price == -1.0)
+                        MessageBox.ShowInfo("Не найдены билеты вылета в указаную дату!");
+                    else if (price > 0.0)
+                        priceTik.value = price;
+                    else
+                        MessageBox.ShowInfo("Ошибка при получении данных с сервера!");
+                    return [3 /*break*/, 3];
+                case 2:
+                    MessageBox.ShowInfo("Ошибка при работе с ключевыми полями!");
+                    _a.label = 3;
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+export function OnApprovalOnClick(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var idop;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, $DVController.GetIdOnApproval(sender.layout.cardInfo.state.stateId)];
+                case 1:
+                    idop = _a.sent();
+                    sender.layout.changeState(idop);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+export function CityChenged(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var moneyBT, dayBT, priceBT;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!sender.hasValue())
+                        return [2 /*return*/];
+                    moneyBT = sender.layout.controls.tryGet("MoneyBusinessTrip");
+                    dayBT = sender.layout.controls.tryGet("CountDayBusinessTrip");
+                    if (moneyBT == null && dayBT == null && dayBT.value == null)
+                        return [2 /*return*/];
+                    return [4 /*yield*/, $DVController.GetMoneyBussinesTrip(sender.value.id)];
+                case 1:
+                    priceBT = (_a.sent()) * dayBT.value;
+                    moneyBT.value = priceBT;
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+export function ChangeState(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        return __generator(this, function (_a) {
+            MessageBox.ShowInfo(e.data.operationId);
             return [2 /*return*/];
         });
     });

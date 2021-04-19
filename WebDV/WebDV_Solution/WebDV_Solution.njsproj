@@ -34,6 +34,12 @@
     <Content Include="src\Styles\Template.scss" />
     <Content Include="tsconfig.json" />
     <Content Include="README.md" />
+    <TypeScriptCompile Include="src\Controllers\DVController.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Controllers\TestController.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Controls\SomeControl\SomeControl.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -42,8 +48,15 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\EventHandlers\SomeEventHandlers.ts" />
     <TypeScriptCompile Include="src\Index.ts" />
+    <TypeScriptCompile Include="src\Models\CustomEmployeeData.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Models\DirectorDataModel.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\Controllers\" />
     <Folder Include="output\" />
     <Folder Include="output\Content\" />
     <Folder Include="output\Content\Modules\" />
@@ -52,6 +65,7 @@
     <Folder Include="src\Controls\" />
     <Folder Include="src\Controls\SomeControl\" />
     <Folder Include="src\EventHandlers\" />
+    <Folder Include="src\Models\" />
     <Folder Include="src\Styles\" />
   </ItemGroup>
   <ItemGroup>
