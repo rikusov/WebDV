@@ -3,7 +3,6 @@ import { Employee } from "@docsvision/webclient/BackOffice/Employee";
 import { MultipleEmployees } from "@docsvision/webclient/BackOffice/MultipleEmployees";
 import { Numerator } from "@docsvision/webclient/BackOffice/Numerator";
 import { StateButtons } from "@docsvision/webclient/BackOffice/StateButtons";
-import { Button } from "@docsvision/webclient/Helpers/Button";
 import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox";
 import { CustomButton } from "@docsvision/webclient/Platform/CustomButton";
 import { DateTimePicker } from "@docsvision/webclient/Platform/DateTimePicker";
@@ -11,19 +10,13 @@ import { Dropdown } from "@docsvision/webclient/Platform/Dropdown";
 import { NumberControl } from "@docsvision/webclient/Platform/Number";
 import { TextArea } from "@docsvision/webclient/Platform/TextArea";
 import { TextBox } from "@docsvision/webclient/Platform/TextBox";
-import { BasicApiEvent, CancelableApiEvent } from "@docsvision/webclient/System/ApiEvent";
 import { BasicEvent } from "@docsvision/webclient/System/BasicEvent";
 import { CancelableEventArgs } from "@docsvision/webclient/System/CancelableEventArgs";
-import { ExtensionManager } from "@docsvision/webclient/System/ExtensionManager";
 import { ICardSavingEventArgs } from "@docsvision/webclient/System/ICardSavingEventArgs";
-import { ICardStateChangingEventArgs } from "@docsvision/webclient/System/ICardStateChangingEventArgs";
 import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
 import { Layout } from "@docsvision/webclient/System/Layout";
-import { layoutManager } from "@docsvision/webclient/System/LayoutManager";
-import { SimpleEvent } from "@docsvision/webclient/System/SimpleEvent";
 import { func } from "prop-types";
 import { $DVController } from "../Controllers/DVController";
-import { $TestController } from "../Controllers/TestController";
 
 /**
  * События считающее количетво дней между даты с и даты по
@@ -79,7 +72,11 @@ export async function OnClickButtonShowShortInfo(sender: CustomButton, e: any): 
     if (s != "") MessageBox.ShowInfo(s);
     else MessageBox.ShowInfo("Не найдены поля для отображения информации");
 }
-
+/**
+ * Перед созранением
+ * @param sender
+ * @param e
+ */
 export async function CardBeforeSaving(sender: Layout, e: CancelableEventArgs<ICardSavingEventArgs>): JQueryDeferred<void> {
     let _name = sender.controls.tryGet<TextBox>("Name");
 
@@ -94,7 +91,11 @@ export async function CardBeforeSaving(sender: Layout, e: CancelableEventArgs<IC
 export async function CheckTelephone(sender: TextBox, e: any): JQueryDeferred<void> {
     if (sender.value && sender.value.length > 12) sender.value = sender.value.substring(0, 12);
 }
-
+/**
+ * При открытии в режиме показа
+ * @param sender
+ * @param e
+ */
 export async function CardActivatedForShow(sender: Layout, e: any): JQueryDeferred<void> {
 
     let ButtonOnApproval = sender.controls.tryGet<CustomButton>("OnApproval");
@@ -106,28 +107,11 @@ export async function CardActivatedForShow(sender: Layout, e: any): JQueryDeferr
     else if (ButtonOnApproval) ButtonOnApproval.params.visibility = false;
 
 }
-
-
-export async function ButtonOnApproval(sender: CustomButton, e: any): JQueryDeferred<void> {
-    //let text = await $TestController.Test()
-
-    /*let employeeId = sender.layout.controls.tryGet<Employee>("PersonBusinessTrip");
-
-    if (employeeId && employeeId.hasValue()) {
-        let model = await $TestController.GetEmployeeData(employeeId.value.id);
-        if (model) {
-            let s = ""
-            if (model.positions && model.positions != "") s += "Должность: " + model.positions + "\n";
-            if (model.unitName && model.unitName != "") s += "Подразделение: " + model.unitName + "\n";
-            if (model.director) s += "Руководитель: " + model.director.displayName;
-
-            MessageBox.ShowInfo(s);
-        }
-    }*/
-
-    
-}
-
+/**
+ * получаем руководителя и телефон
+ * @param sender
+ * @param e
+ */
 export async function ChangePersonBussinesTrip(sender: Employee, e: any): JQueryDeferred<void> {
 
     let director = sender.layout.controls.tryGet<Employee>("Director");
@@ -142,7 +126,11 @@ export async function ChangePersonBussinesTrip(sender: Employee, e: any): JQuery
         } 
     }
 }
-
+/**
+ * первое окрытие карточки
+ * @param sender
+ * @param e
+ */
 export async function CardOpened(sender: Layout, e: IEventArgs): JQueryDeferred<void> {
     let sekretary = await $DVController.getSecretary();
 
@@ -151,7 +139,11 @@ export async function CardOpened(sender: Layout, e: IEventArgs): JQueryDeferred<
     if (sekretary && whoRegistrating)
         whoRegistrating.value = sekretary;
 }
-
+/**
+ * получаем стоимость билетов
+ * @param sender
+ * @param e
+ */
 export async function GetPriceTikcetOnClick(sender: CustomButton, e: IEventArgs): JQueryDeferred<void> {
     let tikets = sender.layout.controls.tryGet<Dropdown>("Tikets");
 
@@ -176,18 +168,23 @@ export async function GetPriceTikcetOnClick(sender: CustomButton, e: IEventArgs)
         else MessageBox.ShowInfo("Ошибка при получении данных с сервера!");
     }
     else MessageBox.ShowInfo("Ошибка при работе с ключевыми полями!");
-    
 }
-
+/**
+ * кнопка на согласование
+ * @param sender
+ * @param e
+ */
 export async function OnApprovalOnClick(sender: CustomButton, e: IEventArgs): JQueryDeferred<void> {
 
     let idop = await $DVController.GetIdOnApproval(sender.layout.cardInfo.state.stateId);
 
     sender.layout.changeState(idop);
-
-   
 }
-
+/**
+ * изменение города
+ * @param sender
+ * @param e
+ */
 export async function CityChenged(sender: DirectoryDesignerRow, e: IEventArgs): JQueryDeferred<void> {
     if (!sender.hasValue()) return;
 
@@ -199,12 +196,4 @@ export async function CityChenged(sender: DirectoryDesignerRow, e: IEventArgs): 
     let priceBT = (await $DVController.GetMoneyBussinesTrip(sender.value.id)) * dayBT.value;
 
     moneyBT.value = priceBT;
-
-}
-
-export async function ChangeState(sender: Layout, e: CancelableEventArgs<ICardStateChangingEventArgs>): JQueryDeferred<void> {
-
-    MessageBox.ShowInfo(e.data.operationId);
-
-
 }

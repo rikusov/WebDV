@@ -111,6 +111,11 @@ export function OnClickButtonShowShortInfo(sender, e) {
         });
     });
 }
+/**
+ * Перед созранением
+ * @param sender
+ * @param e
+ */
 export function CardBeforeSaving(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var _name;
@@ -136,6 +141,11 @@ export function CheckTelephone(sender, e) {
         });
     });
 }
+/**
+ * При открытии в режиме показа
+ * @param sender
+ * @param e
+ */
 export function CardActivatedForShow(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var ButtonOnApproval, StateButton;
@@ -152,13 +162,11 @@ export function CardActivatedForShow(sender, e) {
         });
     });
 }
-export function ButtonOnApproval(sender, e) {
-    return __awaiter(this, void 0, JQueryDeferred, function () {
-        return __generator(this, function (_a) {
-            return [2 /*return*/];
-        });
-    });
-}
+/**
+ * получаем руководителя и телефон
+ * @param sender
+ * @param e
+ */
 export function ChangePersonBussinesTrip(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var director, telephone, director_model;
@@ -181,6 +189,11 @@ export function ChangePersonBussinesTrip(sender, e) {
         });
     });
 }
+/**
+ * первое окрытие карточки
+ * @param sender
+ * @param e
+ */
 export function CardOpened(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var sekretary, whoRegistrating;
@@ -197,6 +210,11 @@ export function CardOpened(sender, e) {
         });
     });
 }
+/**
+ * получаем стоимость билетов
+ * @param sender
+ * @param e
+ */
 export function GetPriceTikcetOnClick(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var tikets, dateBTW, dateBTT, cityControl, priceTik, price;
@@ -237,6 +255,11 @@ export function GetPriceTikcetOnClick(sender, e) {
         });
     });
 }
+/**
+ * кнопка на согласование
+ * @param sender
+ * @param e
+ */
 export function OnApprovalOnClick(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var idop;
@@ -251,6 +274,11 @@ export function OnApprovalOnClick(sender, e) {
         });
     });
 }
+/**
+ * изменение города
+ * @param sender
+ * @param e
+ */
 export function CityChenged(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var moneyBT, dayBT, priceBT;
@@ -269,14 +297,6 @@ export function CityChenged(sender, e) {
                     moneyBT.value = priceBT;
                     return [2 /*return*/];
             }
-        });
-    });
-}
-export function ChangeState(sender, e) {
-    return __awaiter(this, void 0, JQueryDeferred, function () {
-        return __generator(this, function (_a) {
-            MessageBox.ShowInfo(e.data.operationId);
-            return [2 /*return*/];
         });
     });
 }

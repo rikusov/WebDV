@@ -21,9 +21,7 @@ namespace WebDVExtension.Services {
 
                 return listSekretary.ToArray<EmployeeModel>();
             }
-
             return null;
-            
         }
     }
 }

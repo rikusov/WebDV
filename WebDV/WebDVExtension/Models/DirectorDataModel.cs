@@ -1,8 +1,4 @@
 ﻿using DocsVision.BackOffice.WebClient.Employee;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace WebDVExtension.Models {
     
@@ -10,9 +6,13 @@ namespace WebDVExtension.Models {
     /// Модель данных для получения сотрудника и телефона
     /// </summary>
     public class DirectorDataModel {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public EmployeeModel Director { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Phone { get; set; }
-
     }
 }

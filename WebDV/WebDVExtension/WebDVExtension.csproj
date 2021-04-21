@@ -60,7 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Visual Studio 2019\Libs\Docsvision\DocsVision.Platform.ObjectManager.dll</HintPath>
     </Reference>
-    <Reference Include="DocsVision.Platform.ObjectModel, Version=5.5.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519" />
+    <Reference Include="DocsVision.Platform.ObjectModel, Version=5.5.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Visual Studio 2019\Libs\Docsvision\DocsVision.Platform.ObjectModel.dll</HintPath>
+    </Reference>
     <Reference Include="DocsVision.Platform.WebClient">
       <HintPath>..\..\..\..\Visual Studio 2019\Libs\Docsvision\DocsVision.Platform.WebClient.dll</HintPath>
     </Reference>
@@ -105,14 +108,9 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Contrrollers\DVController.cs" />
-    <Compile Include="Contrrollers\TestController.cs" />
-    <Compile Include="Helpers\ServiceHelper.cs" />
-    <Compile Include="Models\CustomEmployeeData.cs" />
     <Compile Include="Models\DirectorDataModel.cs" />
-    <Compile Include="Services\CustomEmployeeService.cs" />
     <Compile Include="Services\GetDirectorService.cs" />
     <Compile Include="Services\GetEmployeesSecretary.cs" />
-    <Compile Include="Services\ICustomEmployeeService.cs" />
     <Compile Include="Services\IGetDirectorService.cs" />
     <Compile Include="Services\IGetEmployeesSecretary.cs" />
     <Compile Include="TemplateServerExtension.cs" />

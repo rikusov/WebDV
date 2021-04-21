@@ -33,7 +33,5 @@ namespace WebDVExtension.Services {
 
             return director;
         }
-
-    
     }
 }

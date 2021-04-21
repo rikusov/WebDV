@@ -4,13 +4,12 @@ using DocsVision.BackOffice.WebClient.Employee;
 using DocsVision.BackOffice.WebClient.Helpers;
 //using DocsVision.BackOffice.WebClient.State;
 using DocsVision.Platform.ObjectManager;
-using DocsVision.Platform.ObjectModel.Search;
+using DocsVision.Platform.ObjectModel;
 using DocsVision.Platform.WebClient;
 using DocsVision.Platform.WebClient.Models.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebDVExtension.Models;
 using WebDVExtension.Services;
@@ -46,7 +45,10 @@ namespace WebDVExtension.Contrrollers {
             return Content(DocsVision.Platform.WebClient.Helpers.JsonHelper.SerializeToJson(response), "application/json");
 
         }
-
+        /// <summary>
+        /// Сервис запроса секретарей
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetSecretary() {
             SessionContext context = _serviceHelper.CurrentObjectContextProvider.GetOrCreateCurrentSessionContext();
 
@@ -59,7 +61,13 @@ namespace WebDVExtension.Contrrollers {
             return Content(DocsVision.Platform.WebClient.Helpers.JsonHelper.SerializeToJson(response), "application/json");
 
         }
-
+        /// <summary>
+        /// Сервис получения цены билета
+        /// </summary>
+        /// <param name="cityId"></param>
+        /// <param name="dateBusinessTripWith"></param>
+        /// <param name="dateBusinessTripTo"></param>
+        /// <returns></returns>
         public ActionResult GetPriceTickets(Guid cityId, DateTime dateBusinessTripWith, DateTime dateBusinessTripTo) {
             SessionContext context = _serviceHelper.CurrentObjectContextProvider.GetOrCreateCurrentSessionContext();
 
@@ -84,7 +92,11 @@ namespace WebDVExtension.Contrrollers {
 
             return Content(DocsVision.Platform.WebClient.Helpers.JsonHelper.SerializeToJson(price), "application/json");
         }
-
+        /// <summary>
+        /// Запрос суммы командировачных
+        /// </summary>
+        /// <param name="cityId"></param>
+        /// <returns></returns>
         public ActionResult GetMoneyBussinesTrip(Guid cityId)
         {
             SessionContext context = _serviceHelper.CurrentObjectContextProvider.GetOrCreateCurrentSessionContext();
@@ -105,7 +117,11 @@ namespace WebDVExtension.Contrrollers {
 
             return Content(DocsVision.Platform.WebClient.Helpers.JsonHelper.SerializeToJson(price), "application/json");
         }
-
+        /// <summary>
+        /// Запрос операции перевода карточки в согласование
+        /// </summary>
+        /// <param name="statcardId"></param>
+        /// <returns></returns>
         public ActionResult GetIdOnApproval(Guid statcardId){
             SessionContext context = _serviceHelper.CurrentObjectContextProvider.GetOrCreateCurrentSessionContext();
 

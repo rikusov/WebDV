@@ -116,6 +116,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * Перед созранением
+     * @param sender
+     * @param e
+     */
     function CardBeforeSaving(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var _name;
@@ -141,6 +146,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * При открытии в режиме показа
+     * @param sender
+     * @param e
+     */
     function CardActivatedForShow(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var ButtonOnApproval, StateButton;
@@ -157,13 +167,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
-    function ButtonOnApproval(sender, e) {
-        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
-            return tslib.__generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
-    }
+    /**
+     * получаем руководителя и телефон
+     * @param sender
+     * @param e
+     */
     function ChangePersonBussinesTrip(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var director, telephone, director_model;
@@ -186,6 +194,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * первое окрытие карточки
+     * @param sender
+     * @param e
+     */
     function CardOpened(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var sekretary, whoRegistrating;
@@ -202,6 +215,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * получаем стоимость билетов
+     * @param sender
+     * @param e
+     */
     function GetPriceTikcetOnClick(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var tikets, dateBTW, dateBTT, cityControl, priceTik, price;
@@ -242,6 +260,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * кнопка на согласование
+     * @param sender
+     * @param e
+     */
     function OnApprovalOnClick(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var idop;
@@ -256,6 +279,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
+    /**
+     * изменение города
+     * @param sender
+     * @param e
+     */
     function CityChenged(sender, e) {
         return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
             var moneyBT, dayBT, priceBT;
@@ -277,14 +305,6 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
             });
         });
     }
-    function ChangeState(sender, e) {
-        return tslib.__awaiter(this, void 0, JQueryDeferred, function () {
-            return tslib.__generator(this, function (_a) {
-                MessageBox.MessageBox.ShowInfo(e.data.operationId);
-                return [2 /*return*/];
-            });
-        });
-    }
 
     var DVEventHandler = /*#__PURE__*/Object.freeze({
         __proto__: null,
@@ -295,13 +315,11 @@ define(['tslib', '@docsvision/webclient/Helpers/MessageBox/MessageBox', '@docsvi
         CardBeforeSaving: CardBeforeSaving,
         CheckTelephone: CheckTelephone,
         CardActivatedForShow: CardActivatedForShow,
-        ButtonOnApproval: ButtonOnApproval,
         ChangePersonBussinesTrip: ChangePersonBussinesTrip,
         CardOpened: CardOpened,
         GetPriceTikcetOnClick: GetPriceTikcetOnClick,
         OnApprovalOnClick: OnApprovalOnClick,
-        CityChenged: CityChenged,
-        ChangeState: ChangeState
+        CityChenged: CityChenged
     });
 
     // Главная входная точка всего расширения

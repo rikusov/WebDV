@@ -1,5 +1,4 @@
-﻿
-namespace WebDVExtension
+﻿namespace WebDVExtension
 {
     /// <summary>
     /// Представляет собой статический класс для расширения разметки веб-констант
