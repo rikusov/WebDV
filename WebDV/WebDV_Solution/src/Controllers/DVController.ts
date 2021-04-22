@@ -2,9 +2,14 @@ import { GenModels } from "@docsvision/webclient/Generated/DocsVision.WebClient.
 import { requestManager } from "@docsvision/webclient/System/RequestManager";
 import { urlStore } from "@docsvision/webclient/System/UrlStore";
 import { DirectorDataModel } from "../Models/DirectorDataModel";
-
+/**
+ * класс реализующий серверное расширение WebDVExtension
+ * */
 export class DVController {
-
+    /**
+     * Получения руководителя сотрудника
+     * @param employeeId Id сотрудника
+     */
     public getDirector(employeeId: string): JQueryDeferred<DirectorDataModel> {
         let url = urlStore.urlResolver.resolveUrl("GetDirector", "DV");
         let data = {
@@ -13,14 +18,21 @@ export class DVController {
 
         return requestManager.post(url, JSON.stringify(data));
     }
-
+    /**
+     * Получения масива сотрудников из группы секрктарь
+     * */
     public getSecretary(): JQueryDeferred<GenModels.EmployeeDataModel[]> {
         let url = urlStore.urlResolver.resolveUrl("GetSecretary", "DV");
 
         return requestManager.get(url);
     }
-
-    public GetPriceTickets(cityId: string, dateBusinessTripWith: Date, dateBusinessTripTo: Date): JQueryDeferred<number> {
+    /**
+     * Получение ценны билетов 
+     * @param cityId Id города
+     * @param dateBusinessTripWith дата вылета
+     * @param dateBusinessTripTo дата прилета
+     */
+    public getPriceTickets(cityId: string, dateBusinessTripWith: Date, dateBusinessTripTo: Date): JQueryDeferred<number> {
         let url = urlStore.urlResolver.resolveUrl("GetPriceTickets", "DV");
         let data = {
             cityId: cityId,
@@ -30,8 +42,11 @@ export class DVController {
 
         return requestManager.post(url, JSON.stringify(data));
     }
-
-    public GetMoneyBussinesTrip(cityId: string): JQueryDeferred<number> {
+    /**
+     * Возврвщает сумму командировачных
+     * @param cityId Id города
+     */
+    public getMoneyBussinesTrip(cityId: string): JQueryDeferred<number> {
         let url = urlStore.urlResolver.resolveUrl("GetMoneyBussinesTrip", "DV");
         let data = {
             cityId: cityId,
@@ -39,11 +54,18 @@ export class DVController {
 
         return requestManager.post(url, JSON.stringify(data));
     }
-
-    public GetIdOnApproval(statcardId: string): JQueryDeferred<string> {
-        let url = urlStore.urlResolver.resolveUrl("GetIdOnApproval", "DV");
+    /**
+     * *Возвращат id операции для смены статуса карточки
+     * @param kindCardId Id вида карточки
+     * @param statCardName текущий статус карточки
+     * @param endStatName целевой статус карточки
+     */
+    public getOperationsIdState(kindCardId: string, statCardId: string, endStateName: string): JQueryDeferred<string> {
+        let url = urlStore.urlResolver.resolveUrl("GetOperationsIdState", "DV");
         let data = {
-            statcardId: statcardId
+            kindCardId: kindCardId,
+            statCardId: statCardId,
+            endStateName: endStateName
         }
 
         return requestManager.post(url, JSON.stringify(data));

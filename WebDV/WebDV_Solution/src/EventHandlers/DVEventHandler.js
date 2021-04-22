@@ -37,45 +37,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox";
 import { $DVController } from "../Controllers/DVController";
 /**
- * События считающее количетво дней между даты с и даты по
+ * Функция считающее количетво дней между "даты с" и "даты по"
  * @param l laypot для поиска поля количества дней
  * @param dBTW // дата с
- * @param dBTT //дата по
+ * @param dBTT // дата по
  */
-export function setCountDayBusinesDay(l, dBTW, dBTT) {
-    var CountDayBT = l.controls.tryGet("CountDayBusinessTrip");
-    if (CountDayBT && dBTW && dBTT) {
-        var diff = Math.floor((dBTT.getTime() - dBTW.getTime()) / (1000 * 3600 * 24)) + 1;
-        if (diff > 0)
-            CountDayBT.value = diff;
-        else
-            CountDayBT.value = null;
-    }
-}
-/**
- * событие отлавливающее изменения даты с
- */
-export function dateBusinessTripWithChanged(sender, e) {
+export function setCountDayBusinesDay(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
-        var _dateBusinessTripTo;
+        var CountDayBT, dBTW, dBTT, diff, cityCtrl, priceTicketsCtrl;
         return __generator(this, function (_a) {
-            _dateBusinessTripTo = sender.layout.controls.tryGet("DateBusinessTripTo");
-            if (_dateBusinessTripTo && _dateBusinessTripTo.value)
-                setCountDayBusinesDay(sender.layout, sender.value, _dateBusinessTripTo.value);
-            return [2 /*return*/];
-        });
-    });
-}
-/**
- * событие отлавливающее изменения даты по
- */
-export function dateBuSinessTripToChanged(sender, e) {
-    return __awaiter(this, void 0, JQueryDeferred, function () {
-        var _dateBusinessTripWith;
-        return __generator(this, function (_a) {
-            _dateBusinessTripWith = sender.layout.controls.tryGet("DateBusinessTripWith");
-            if (_dateBusinessTripWith && _dateBusinessTripWith.value)
-                setCountDayBusinesDay(sender.layout, _dateBusinessTripWith.value, sender.value);
+            CountDayBT = sender.layout.controls.tryGet("CountDayBusinessTrip");
+            dBTW = sender.layout.controls.tryGet("DateBusinessTripWith");
+            dBTT = sender.layout.controls.tryGet("DateBusinessTripTo");
+            if (CountDayBT && dBTW && dBTW.hasValue() && dBTT && dBTT.hasValue()) {
+                diff = Math.floor((dBTT.value.getTime() - dBTW.value.getTime()) / (1000 * 3600 * 24)) + 1;
+                if (diff > 0)
+                    CountDayBT.value = diff;
+                else
+                    CountDayBT.value = null;
+            }
+            cityCtrl = sender.layout.controls.tryGet("CityBusinessTrip");
+            if (cityCtrl && cityCtrl.hasValue())
+                cityChenged(cityCtrl, e);
+            else {
+                priceTicketsCtrl = sender.layout.controls.tryGet("PriceTickets");
+                if (priceTicketsCtrl)
+                    priceTicketsCtrl.value = null;
+            }
             return [2 /*return*/];
         });
     });
@@ -83,7 +71,7 @@ export function dateBuSinessTripToChanged(sender, e) {
 /**
  * показ краткой информации
  */
-export function OnClickButtonShowShortInfo(sender, e) {
+export function onClickButtonShowShortInfo(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var _nubmerrequest, _dateCreated, _dateBTWith, _dateBTTo, _baseBTInfo, s;
         return __generator(this, function (_a) {
@@ -112,11 +100,9 @@ export function OnClickButtonShowShortInfo(sender, e) {
     });
 }
 /**
- * Перед созранением
- * @param sender
- * @param e
+ * Проверка перед сохранением
  */
-export function CardBeforeSaving(sender, e) {
+export function onSaveCard(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var _name;
         return __generator(this, function (_a) {
@@ -124,15 +110,17 @@ export function CardBeforeSaving(sender, e) {
             if (_name && (_name.value == null || _name.value == "")) {
                 MessageBox.ShowInfo("Не заполнено поле Название!");
                 e.cancel();
+                return [2 /*return*/];
             }
+            e.accept();
             return [2 /*return*/];
         });
     });
 }
 /**
- * Корректировка телефона
+ * Проверка введенного телефона
  */
-export function CheckTelephone(sender, e) {
+export function telephoneChanged(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         return __generator(this, function (_a) {
             if (sender.value && sender.value.length > 12)
@@ -142,11 +130,9 @@ export function CheckTelephone(sender, e) {
     });
 }
 /**
- * При открытии в режиме показа
- * @param sender
- * @param e
+ * Активация/Деактивация кнопки "На соласование"
  */
-export function CardActivatedForShow(sender, e) {
+export function onVisebleButtonOnApproval(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var ButtonOnApproval, StateButton;
         return __generator(this, function (_a) {
@@ -164,10 +150,9 @@ export function CardActivatedForShow(sender, e) {
 }
 /**
  * получаем руководителя и телефон
- * @param sender
- * @param e
+ * при смене командированого
  */
-export function ChangePersonBussinesTrip(sender, e) {
+export function onChangedPersonBussinesTrip(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var director, telephone, director_model;
         return __generator(this, function (_a) {
@@ -183,6 +168,10 @@ export function ChangePersonBussinesTrip(sender, e) {
                         director.value = director_model.director;
                         telephone.value = director_model.phone;
                     }
+                    else {
+                        director.value = null;
+                        telephone.value = null;
+                    }
                     _a.label = 2;
                 case 2: return [2 /*return*/];
             }
@@ -191,10 +180,8 @@ export function ChangePersonBussinesTrip(sender, e) {
 }
 /**
  * первое окрытие карточки
- * @param sender
- * @param e
  */
-export function CardOpened(sender, e) {
+export function openedCard(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var sekretary, whoRegistrating;
         return __generator(this, function (_a) {
@@ -212,10 +199,8 @@ export function CardOpened(sender, e) {
 }
 /**
  * получаем стоимость билетов
- * @param sender
- * @param e
  */
-export function GetPriceTikcetOnClick(sender, e) {
+export function getPriceTikcetOnClick(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
         var tikets, dateBTW, dateBTT, cityControl, priceTik, price;
         return __generator(this, function (_a) {
@@ -231,7 +216,7 @@ export function GetPriceTikcetOnClick(sender, e) {
                     cityControl = sender.layout.controls.tryGet("CityBusinessTrip");
                     priceTik = sender.layout.controls.tryGet("PriceTickets");
                     if (!(dateBTT && dateBTT.value && dateBTW && dateBTW.value && cityControl && cityControl.hasValue() && priceTik)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, $DVController.GetPriceTickets(cityControl.value.id, dateBTW.value, dateBTT.value)];
+                    return [4 /*yield*/, $DVController.getPriceTickets(cityControl.value.id, dateBTW.value, dateBTT.value)];
                 case 1:
                     price = _a.sent();
                     if (price == -4.0)
@@ -257,31 +242,32 @@ export function GetPriceTikcetOnClick(sender, e) {
 }
 /**
  * кнопка на согласование
- * @param sender
- * @param e
  */
-export function OnApprovalOnClick(sender, e) {
+export function onApprovalOnClick(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
-        var idop;
+        var cardInfo, operationId;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, $DVController.GetIdOnApproval(sender.layout.cardInfo.state.stateId)];
+                case 0:
+                    cardInfo = sender.layout.cardInfo;
+                    return [4 /*yield*/, $DVController.getOperationsIdState(cardInfo.kindId, cardInfo.state.stateId, "OnApproval")];
                 case 1:
-                    idop = _a.sent();
-                    sender.layout.changeState(idop);
+                    operationId = _a.sent();
+                    if (operationId != "00000000-0000-0000-0000-000000000000")
+                        sender.layout.changeState(operationId);
+                    else
+                        MessageBox.ShowWarning("Ошибка при смене состояния");
                     return [2 /*return*/];
             }
         });
     });
 }
 /**
- * изменение города
- * @param sender
- * @param e
+ * событие изменения города
  */
-export function CityChenged(sender, e) {
+export function cityChenged(sender, e) {
     return __awaiter(this, void 0, JQueryDeferred, function () {
-        var moneyBT, dayBT, priceBT;
+        var moneyBT, dayBT, priceBT, priceTicketsCtrl;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -291,12 +277,34 @@ export function CityChenged(sender, e) {
                     dayBT = sender.layout.controls.tryGet("CountDayBusinessTrip");
                     if (moneyBT == null && dayBT == null && dayBT.value == null)
                         return [2 /*return*/];
-                    return [4 /*yield*/, $DVController.GetMoneyBussinesTrip(sender.value.id)];
+                    return [4 /*yield*/, $DVController.getMoneyBussinesTrip(sender.value.id)];
                 case 1:
                     priceBT = (_a.sent()) * dayBT.value;
-                    moneyBT.value = priceBT;
+                    if (priceBT > 0.0)
+                        moneyBT.value = priceBT;
+                    else
+                        moneyBT.value = null;
+                    priceTicketsCtrl = sender.layout.controls.tryGet("PriceTickets");
+                    if (priceTicketsCtrl)
+                        priceTicketsCtrl.value = null;
                     return [2 /*return*/];
             }
+        });
+    });
+}
+/**
+ * изменения вида билетов
+ */
+export function ticketsChenged(sender, e) {
+    return __awaiter(this, void 0, JQueryDeferred, function () {
+        var priceTicketsCtrl;
+        return __generator(this, function (_a) {
+            if (sender.hasValue() && sender.value == "Поезд") {
+                priceTicketsCtrl = sender.layout.controls.tryGet("PriceTickets");
+                if (priceTicketsCtrl)
+                    priceTicketsCtrl.value = null;
+            }
+            return [2 /*return*/];
         });
     });
 }

@@ -13,13 +13,11 @@ using System.Web.Mvc;
 using WebDVExtension.Contrrollers;
 using WebDVExtension.Services;
 
-namespace WebDVExtension
-{
+namespace WebDVExtension{
     /// <summary>
     /// Задаёт описание расширения для WebClient, которое задано в текущей сборке
     /// </summary>
-    public class WebDVExtension : WebClientExtension
-    {
+    public class WebDVExtension : WebClientExtension{
         /// <summary>
         /// Создаёт новый экземпляр <see cref="WebDVExtension" />
         /// </summary>
@@ -41,9 +39,7 @@ namespace WebDVExtension
         public override Version ExtensionVersion{
             get { return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); }
         }
-
         #region WebClientExtension Overrides
-
         /// <summary>
         /// Gets registered service activators
         /// </summary>
@@ -106,9 +102,8 @@ namespace WebDVExtension
         /// <returns>a dictionaty of card factories</returns>
         protected override Dictionary<Guid, Func<ICardFactory>> GetCardFactories(){ return new Dictionary<Guid, Func<ICardFactory>>{}; }
         /// <summary>
-        /// 
+        /// Возвращает имя и версию серверного расширения
         /// </summary>
-        /// <returns></returns>
         protected override WebClientNavigatorExtension GetNavigatorExtension(){
             return new WebClientNavigatorExtension( new WebClientNavigatorExtensionInitInfo { ExtensionName = ExtensionName, ExtensionVersion = ExtensionVersion});
         }

@@ -73,4 +73,3 @@ C:\Users\Alexandr\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\System.W
 C:\Users\Alexandr\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\System.Web.Mvc.dll
 C:\Users\Alexandr\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\System.Web.Optimization.dll
 C:\Users\Alexandr\Documents\GitHub\WebDV\WebDV\WebDVExtension\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Alexandr\Documents\GitHub\WebDV\WebDV\WebDVExtension\obj\Debug\WebDVExtension.csprojAssemblyReference.cache

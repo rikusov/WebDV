@@ -26,9 +26,12 @@ namespace WebDVExtension.Services {
         /// </summary>
         /// <param name="director">руководитель</param>
         /// <param name="employeeId">ID сотрудника</param>
-        /// <returns></returns>
+        /// <returns>Первую модель сотрудника который является руководителем 
+        /// и не является текущим сотрудником.
+        /// Если текущий сотрудник руководитель организации то возвращается он
+        /// </returns>
         private StaffEmployee RGetDirector(StaffEmployee director, Guid employeeId) {
-            if (director.GetObjectId() == employeeId && director.Unit.ParentUnit != null)
+            if (director != null && director.GetObjectId() == employeeId && director.Unit.ParentUnit != null)
                 return RGetDirector(director.Unit.ParentUnit.Manager, employeeId);
 
             return director;

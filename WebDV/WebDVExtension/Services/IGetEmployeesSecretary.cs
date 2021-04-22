@@ -10,7 +10,7 @@ namespace WebDVExtension.Services {
         /// <summary>
         /// Получение сотрудников имеющих роль секрктарь
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Возврашает масив сотрудников имеющих роль секретарь</returns>
         EmployeeModel[] GetSecretary(ServiceHelper serviceHelper, SessionContext context);
     }
 }

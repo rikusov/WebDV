@@ -6,7 +6,6 @@ using DocsVision.Platform.WebClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace WebDVExtension.Services {
     public class GetEmployeesSecretary : IGetEmployeesSecretary {
